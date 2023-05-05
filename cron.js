@@ -10,10 +10,11 @@ const bot = new TelegramBot(process.env.TELEGRAM, { polling: true });
 const chatIds = (process.env.CHAT_IDS?.split(",") || []).map((id) => +id);
 bot.on("message", (msg) => {
   const chatId = msg.chat.id;
-  console.log(`Received message from chat ID ${chatId}`);
-  //send chat id ass meeage
-  bot.sendMessage(chatId, "Your chat id is: " + chatId);
+  const senderName = msg.from.first_name;
+  console.log(`Received message from ${senderName} (chat ID ${chatId})`);
+  bot.sendMessage(chatId, `Hi ${senderName}, your chat ID is: ${chatId}`);
 });
+
 //in html
 const genAlertMessageFromOrder = (order) => {
   return `
