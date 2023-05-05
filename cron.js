@@ -7,7 +7,7 @@ require("dotenv").config();
 
 const bot = new TelegramBot(process.env.TELEGRAM, { polling: true });
 ///get chat id when started
-const chatIds = [342833991, 1167478253];
+const chatIds = (process.env.CHAT_IDS?.split(",") || []).map((id) => +id);
 bot.on("message", (msg) => {
   const chatId = msg.chat.id;
   console.log(`Received message from chat ID ${chatId}`);
